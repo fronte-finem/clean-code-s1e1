@@ -26,7 +26,7 @@ body {
 
 }
 
-.main-page {
+.main {
   display: block;
   width: 500px;
   margin: 0 auto 0;
@@ -37,7 +37,7 @@ body {
   display: inline-block;
   flex-grow: 1
 }
-.task-row-wrapper {
+.task-wrapper {
   display: flex;
 }
 
