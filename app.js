@@ -3,20 +3,14 @@ let buttonAddTask = document.querySelector(".js-button-add");
 let tasksTodo = document.querySelector(".js-tasks-todo");
 let tasksDone = document.querySelector(".js-tasks-done");
 
-buttonAddTask.onclick = addTask;
-buttonAddTask.addEventListener("click", addTask);
+buttonAddTask.addEventListener("click", onAddTask);
 buttonAddTask.addEventListener("click", ajaxRequest);
 
-for (let i = 0; i < tasksTodo.children.length; i++) {
-  bindTaskEvents(tasksTodo.children[i], taskCompleted);
-}
-
-for (let i = 0; i < tasksDone.children.length; i++) {
-  bindTaskEvents(tasksDone.children[i], taskIncomplete);
-}
+[...tasksTodo.children].forEach(elem => bindTaskEvents(elem, onTaskDone));
+[...tasksDone.children].forEach(elem => bindTaskEvents(elem, onTaskTodo));
 
 function createNewTaskElement(taskString) {
-  let listItem = document.createElement("li");
+  let taskItem = document.createElement("li");
   let checkBox = document.createElement("input");
   let label = document.createElement("label");
   let editInput = document.createElement("input");
@@ -43,38 +37,36 @@ function createNewTaskElement(taskString) {
   deleteButton.className = "todo-app__button js-button-delete";
   deleteButton.appendChild(deleteButtonImg);
 
-  listItem.className = "todo-app__task-item";
-  listItem.appendChild(checkBox);
-  listItem.appendChild(label);
-  listItem.appendChild(editInput);
-  listItem.appendChild(editButton);
-  listItem.appendChild(deleteButton);
-  return listItem;
+  taskItem.className = "todo-app__task-item";
+  taskItem.appendChild(checkBox);
+  taskItem.appendChild(label);
+  taskItem.appendChild(editInput);
+  taskItem.appendChild(editButton);
+  taskItem.appendChild(deleteButton);
+  return taskItem;
 }
 
-function addTask() {
+function onAddTask() {
   console.log("Add Task...");
 
   if (!inputAddTask.value) return;
-  let listItem = createNewTaskElement(inputAddTask.value);
-
-  tasksTodo.appendChild(listItem);
-  bindTaskEvents(listItem, taskCompleted);
-
+  let taskItem = createNewTaskElement(inputAddTask.value);
+  tasksTodo.appendChild(taskItem);
+  bindTaskEvents(taskItem, onTaskDone);
   inputAddTask.value = "";
 }
 
-function editTask() {
+function onEditTask() {
   console.log("Edit Task...");
   console.log("Change 'edit' to 'save'");
 
-  let listItem = this.parentNode;
+  let taskItem = this.parentNode;
 
-  let editInput = listItem.querySelector(".todo-app__input");
-  let label = listItem.querySelector(".todo-app__label");
-  let editBtn = listItem.querySelector(".js-button-edit");
+  let label = taskItem.querySelector(".todo-app__label");
+  let editInput = taskItem.querySelector(".todo-app__input");
+  let editBtn = taskItem.querySelector(".js-button-edit");
 
-  if (listItem.classList.contains("todo-app__task-item_edit")) {
+  if (taskItem.classList.contains("todo-app__task-item_edit")) {
     label.innerText = editInput.value;
     editBtn.innerText = "Edit";
   } else {
@@ -82,42 +74,42 @@ function editTask() {
     editBtn.innerText = "Save";
   }
 
-  listItem.classList.toggle("todo-app__task-item_edit");
+  taskItem.classList.toggle("todo-app__task-item_edit");
 };
 
-function deleteTask() {
+function onDeleteTask() {
   console.log("Delete Task...");
-  let listItem = this.parentNode;
-  let ul = listItem.parentNode;
-  ul.removeChild(listItem);
+  let taskItem = this.parentNode;
+  let ul = taskItem.parentNode;
+  ul.removeChild(taskItem);
 }
 
-function taskCompleted() {
+function onTaskDone() {
   console.log("Complete Task...");
-  let listItem = this.parentNode;
-  tasksDone.appendChild(listItem);
-  bindTaskEvents(listItem, taskIncomplete);
+  let taskItem = this.parentNode;
+  tasksDone.appendChild(taskItem);
+  bindTaskEvents(taskItem, onTaskTodo);
 }
 
-function taskIncomplete() {
+function onTaskTodo() {
   console.log("Incomplete Task...");
-  let listItem = this.parentNode;
-  tasksTodo.appendChild(listItem);
-  bindTaskEvents(listItem, taskCompleted);
+  let taskItem = this.parentNode;
+  tasksTodo.appendChild(taskItem);
+  bindTaskEvents(taskItem, onTaskDone);
 }
 
 function ajaxRequest() {
   console.log("AJAX Request");
 }
 
-function bindTaskEvents(taskListItem, checkBoxEventHandler) {
+function bindTaskEvents(taskItem, checkBoxEventHandler) {
   console.log("bind list item events");
 
-  let checkBox = taskListItem.querySelector(".todo-app__check");
-  let editButton = taskListItem.querySelector(".js-button-edit");
-  let deleteButton = taskListItem.querySelector(".js-button-delete");
+  let checkBox = taskItem.querySelector(".todo-app__check");
+  let editButton = taskItem.querySelector(".js-button-edit");
+  let deleteButton = taskItem.querySelector(".js-button-delete");
 
-  editButton.onclick = editTask;
-  deleteButton.onclick = deleteTask;
+  editButton.onclick = onEditTask;
+  deleteButton.onclick = onDeleteTask;
   checkBox.onchange = checkBoxEventHandler;
 }
