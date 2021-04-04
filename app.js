@@ -13,21 +13,26 @@ var createNewTaskElement = function(taskString) {
   var deleteButton = document.createElement("button");
   var deleteButtonImg = document.createElement("img");
 
-  label.innerText = taskString;
-  label.className = 'task';
+  deleteButtonImg.className = "todo-app__icon-delete";
+  deleteButtonImg.src = "./remove.svg";
+  deleteButtonImg.alt = "";
 
+  label.className = "todo-app__label";
+  label.innerText = taskString;
+
+  checkBox.className = "todo-app__check";
   checkBox.type = "checkbox";
 
+  editInput.className = "todo-app__input";
   editInput.type = "text";
-  editInput.className = "task";
 
+  editButton.className = "todo-app__button js-button-edit";
   editButton.innerText = "Edit";
-  editButton.className = "edit";
 
-  deleteButton.className = "delete";
-  deleteButtonImg.src = './remove.svg';
+  deleteButton.className = "todo-app__button js-button-delete";
   deleteButton.appendChild(deleteButtonImg);
 
+  listItem.className = "todo-app__task-item";
   listItem.appendChild(checkBox);
   listItem.appendChild(label);
   listItem.appendChild(editInput);
