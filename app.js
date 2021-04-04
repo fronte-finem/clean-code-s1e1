@@ -1,7 +1,7 @@
-let taskInput = document.getElementById("new-task");
-let addButton = document.getElementsByTagName("button")[0];
-let incompleteTaskHolder = document.getElementById("incomplete-tasks");
-let completedTasksHolder = document.getElementById("completed-tasks");
+let inputAddTask = document.querySelector(".js-input-add");
+let buttonAddTask = document.querySelector(".js-button-add");
+let tasksTodo = document.querySelector(".js-tasks-todo");
+let tasksDone = document.querySelector(".js-tasks-done");
 
 
 function createNewTaskElement(taskString) {
@@ -44,13 +44,13 @@ function createNewTaskElement(taskString) {
 function addTask() {
   console.log("Add Task...");
 
-  if (!taskInput.value) return;
-  let listItem = createNewTaskElement(taskInput.value);
+  if (!inputAddTask.value) return;
+  let listItem = createNewTaskElement(inputAddTask.value);
 
-  incompleteTaskHolder.appendChild(listItem);
+  tasksTodo.appendChild(listItem);
   bindTaskEvents(listItem, taskCompleted);
 
-  taskInput.value = "";
+  inputAddTask.value = "";
 }
 
 function editTask() {
@@ -87,14 +87,14 @@ function taskCompleted() {
   console.log("Complete Task...");
 
   let listItem = this.parentNode;
-  completedTasksHolder.appendChild(listItem);
+  tasksDone.appendChild(listItem);
   bindTaskEvents(listItem, taskIncomplete);
 }
 
 function taskIncomplete() {
   console.log("Incomplete Task...");
   let listItem = this.parentNode;
-  incompleteTaskHolder.appendChild(listItem);
+  tasksTodo.appendChild(listItem);
   bindTaskEvents(listItem, taskCompleted);
 }
 
@@ -102,9 +102,9 @@ function ajaxRequest() {
     console.log("AJAX Request");
 }
 
-addButton.onclick = addTask;
-addButton.addEventListener("click", addTask);
-addButton.addEventListener("click", ajaxRequest);
+buttonAddTask.onclick = addTask;
+buttonAddTask.addEventListener("click", addTask);
+buttonAddTask.addEventListener("click", ajaxRequest);
 
 function bindTaskEvents(taskListItem, checkBoxEventHandler) {
   console.log("bind list item events");
@@ -118,10 +118,10 @@ function bindTaskEvents(taskListItem, checkBoxEventHandler) {
   checkBox.onchange = checkBoxEventHandler;
 }
 
-for (let i = 0; i < incompleteTaskHolder.children.length; i++) {
-  bindTaskEvents(incompleteTaskHolder.children[i], taskCompleted);
+for (let i = 0; i < tasksTodo.children.length; i++) {
+  bindTaskEvents(tasksTodo.children[i], taskCompleted);
 }
 
-for (let i = 0; i < completedTasksHolder.children.length; i++) {
-  bindTaskEvents(completedTasksHolder.children[i], taskIncomplete);
+for (let i = 0; i < tasksDone.children.length; i++) {
+  bindTaskEvents(tasksDone.children[i], taskIncomplete);
 }
