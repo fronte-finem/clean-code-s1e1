@@ -3,6 +3,17 @@ let buttonAddTask = document.querySelector(".js-button-add");
 let tasksTodo = document.querySelector(".js-tasks-todo");
 let tasksDone = document.querySelector(".js-tasks-done");
 
+buttonAddTask.onclick = addTask;
+buttonAddTask.addEventListener("click", addTask);
+buttonAddTask.addEventListener("click", ajaxRequest);
+
+for (let i = 0; i < tasksTodo.children.length; i++) {
+  bindTaskEvents(tasksTodo.children[i], taskCompleted);
+}
+
+for (let i = 0; i < tasksDone.children.length; i++) {
+  bindTaskEvents(tasksDone.children[i], taskIncomplete);
+}
 
 function createNewTaskElement(taskString) {
   let listItem = document.createElement("li");
@@ -59,12 +70,11 @@ function editTask() {
 
   let listItem = this.parentNode;
 
-  let editInput = listItem.querySelector('input[type = text]');
-  let label = listItem.querySelector("label");
-  let editBtn = listItem.querySelector(".edit");
-  let containsClass = listItem.classList.contains("edit-mode");
+  let editInput = listItem.querySelector(".todo-app__input");
+  let label = listItem.querySelector(".todo-app__label");
+  let editBtn = listItem.querySelector(".js-button-edit");
 
-  if (containsClass) {
+  if (listItem.classList.contains("todo-app__task-item_edit")) {
     label.innerText = editInput.value;
     editBtn.innerText = "Edit";
   } else {
@@ -72,12 +82,11 @@ function editTask() {
     editBtn.innerText = "Save";
   }
 
-  listItem.classList.toggle("edit-mode");
+  listItem.classList.toggle("todo-app__task-item_edit");
 };
 
 function deleteTask() {
   console.log("Delete Task...");
-
   let listItem = this.parentNode;
   let ul = listItem.parentNode;
   ul.removeChild(listItem);
@@ -85,7 +94,6 @@ function deleteTask() {
 
 function taskCompleted() {
   console.log("Complete Task...");
-
   let listItem = this.parentNode;
   tasksDone.appendChild(listItem);
   bindTaskEvents(listItem, taskIncomplete);
@@ -99,29 +107,17 @@ function taskIncomplete() {
 }
 
 function ajaxRequest() {
-    console.log("AJAX Request");
+  console.log("AJAX Request");
 }
-
-buttonAddTask.onclick = addTask;
-buttonAddTask.addEventListener("click", addTask);
-buttonAddTask.addEventListener("click", ajaxRequest);
 
 function bindTaskEvents(taskListItem, checkBoxEventHandler) {
   console.log("bind list item events");
 
-  let checkBox = taskListItem.querySelector("input[type = checkbox]");
-  let editButton = taskListItem.querySelector("button.edit");
-  let deleteButton = taskListItem.querySelector("button.delete");
+  let checkBox = taskListItem.querySelector(".todo-app__check");
+  let editButton = taskListItem.querySelector(".js-button-edit");
+  let deleteButton = taskListItem.querySelector(".js-button-delete");
 
   editButton.onclick = editTask;
   deleteButton.onclick = deleteTask;
   checkBox.onchange = checkBoxEventHandler;
-}
-
-for (let i = 0; i < tasksTodo.children.length; i++) {
-  bindTaskEvents(tasksTodo.children[i], taskCompleted);
-}
-
-for (let i = 0; i < tasksDone.children.length; i++) {
-  bindTaskEvents(tasksDone.children[i], taskIncomplete);
 }
