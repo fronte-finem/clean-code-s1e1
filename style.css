@@ -4,6 +4,7 @@ body {
   color: #333;
   font-family: Lato, sans-serif;
 }
+
 .aaa {
   width: 500px;
   margin: 0 auto;
@@ -18,14 +19,19 @@ body {
 }
 
 @media (max-width: 768px) {
-.aaa { text-align: center;
+
+  .aaa {
+    text-align: center;
+  }
+
 }
-}
+
 .centered-main-page-element {
   display: block;
   width: 500px;
   margin: 0 auto 0;
 }
+
 .task {
   width: 56%;
   display: inline-block;
@@ -34,6 +40,7 @@ body {
 .task-row-wrapper {
   display: flex;
 }
+
 ul {
   margin: 0;
   padding: 0px;
@@ -56,6 +63,7 @@ button {
 button:hover {
   color: #3a3a3a;
 }
+
 /* Heading */
 h3,
 label[for="new-task"] {
