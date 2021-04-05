@@ -9,6 +9,9 @@ buttonAddTask.addEventListener("click", ajaxRequest);
 [...tasksTodo.children].forEach(elem => bindTaskEvents(elem, onTaskDone));
 [...tasksDone.children].forEach(elem => bindTaskEvents(elem, onTaskTodo));
 
+document.querySelector(".todo-app__add-task .todo-app__title")
+        .addEventListener("click", () => inputAddTask.focus());
+
 function createNewTaskElement(taskString) {
   let taskItem = document.createElement("li");
   let checkBox = document.createElement("input");
