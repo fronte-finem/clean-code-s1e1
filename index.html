@@ -24,19 +24,19 @@
         <section class="todo-app__add-task">
           <h3 class="todo-app__title">Add Item</h3>
           <div class="todo-app__task-wrapper">
-            <input class="todo-app__input" id="new-task" type="text">
-            <button class="todo-app__button">Add</button>
+            <input class="todo-app__input js-input-add" type="text">
+            <button class="todo-app__button js-button-add">Add</button>
           </div>
         </section>
         <section class="todo-app__tasks">
           <h3 class="todo-app__title">Todo</h3>
-          <ul class="todo-app__task-list" id="incomplete-tasks">
+          <ul class="todo-app__task-list js-tasks-todo">
             <li class="todo-app__task-item">
               <input class="todo-app__check" type="checkbox">
               <label class="todo-app__label">Pay Bills</label>
               <input class="todo-app__input" type="text">
-              <button class="todo-app__button todo-app__button-edit">Edit</button>
-              <button class="todo-app__button todo-app__button-delete">
+              <button class="todo-app__button js-button-edit">Edit</button>
+              <button class="todo-app__button js-button-delete">
                 <img class="todo-app__icon-delete" src="./remove.svg" alt="">
               </button>
             </li>
@@ -44,8 +44,8 @@
               <input class="todo-app__check" type="checkbox">
               <label class="todo-app__label">Go Shopping</label>
               <input class="todo-app__input" type="text" value="Go Shopping">
-              <button class="todo-app__button todo-app__button-edit">Save</button>
-              <button class="todo-app__button todo-app__button-delete">
+              <button class="todo-app__button js-button-edit">Save</button>
+              <button class="todo-app__button js-button-delete">
                 <img class="todo-app__icon-delete" src="./remove.svg" alt="">
               </button>
             </li>
@@ -53,13 +53,13 @@
         </section>
         <section class="todo-app__tasks todo-app__tasks_done">
           <h3 class="todo-app__title">Completed</h3>
-          <ul class="todo-app__task-list" id="completed-tasks">
+          <ul class="todo-app__task-list js-tasks-done">
             <li class="todo-app__task-item">
               <input class="todo-app__check" type="checkbox" checked>
               <label class="todo-app__label">See the Doctor</label>
               <input class="todo-app__input" type="text">
-              <button class="todo-app__button todo-app__button-edit">Edit</button>
-              <button class="todo-app__button todo-app__button-delete">
+              <button class="todo-app__button js-button-edit">Edit</button>
+              <button class="todo-app__button js-button-delete">
                 <img class="todo-app__icon-delete" src="./remove.svg" alt="">
               </button>
             </li>
