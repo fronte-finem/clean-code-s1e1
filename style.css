@@ -109,7 +109,7 @@ html {
 .todo-app__label,
 .todo-app__input {
   display: inline-block;
-  flex-grow: 1
+  flex-grow: 1;
 }
 
 .todo-app__button {
